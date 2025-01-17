@@ -6,24 +6,24 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari-power-widgets-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari-power-widgets-{{ version }}.tar.gz
   sha256: 8259b28e2774cab10f7fd9de425c6e3a11a0cbfe3d245410d3bf600e2b4bbbfb
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
   run:
     - magicgui
     - napari
     - numpy
     - pandas
-    - python >=3.8
+    - python >={{ python_min }}
     - typing-extensions
 
 test:
@@ -34,6 +34,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/hanjinliu/napari-power-widgets
